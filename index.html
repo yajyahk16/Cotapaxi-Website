@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotapaxi — Taking Brands To The Next Level</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <style>
+    @font-face {
+      font-family: 'GTAmerica';
+      src: url('/brand_assets/GT-America-Regular.ttf') format('truetype');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'GTAmericaComp';
+      src: url('/brand_assets/GT-America-Compressed-Medium.ttf') format('truetype');
+      font-weight: 500; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'GTAmericaComp';
+      src: url('/brand_assets/GT-America-Compressed-Bold.ttf') format('truetype');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+
+    :root {
+      --bg:    #0c0c0d;
+      --bg2:   #0f0f10;
+      --bg3:   #131315;
+      --green: #b5f53f;
+      --gmuted:#182a06;
+      --white: #ffffff;
+      --g100:  #b7b7b8;
+      --g200:  #737373;
+      --g300:  #2c2c2e;
+      --bdr:   rgba(255,255,255,0.07);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 99px; }
+    ::-webkit-scrollbar-track { background: #1c1c1e; }
+
+    body {
+      background: var(--bg); color: var(--white);
+      font-family: 'GTAmerica', 'Roboto', sans-serif;
+      font-size: 1rem; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      height: 58px; display: flex; align-items: center;
+      justify-content: space-between; padding: 0 2.5rem;
+      background: rgba(12,12,13,0.88);
+      backdrop-filter: blur(16px) saturate(1.4);
+      border-bottom: 1px solid var(--bdr);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--g100); text-decoration: none; font-size: 0.875rem;
+      letter-spacing: 0.01em; transition: color 0.18s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .btn-ghost {
+      padding: 0.4rem 1.125rem; border-radius: 4px; font-size: 0.8125rem;
+      border: 1px solid var(--bdr); color: var(--white); text-decoration: none;
+      transition: border-color 0.18s, color 0.18s; display: inline-block;
+    }
+    .btn-ghost:hover { border-color: rgba(181,245,63,0.5); color: var(--green); }
+
+    .btn-solid {
+      padding: 0.5rem 1.375rem; border-radius: 4px; font-size: 0.8125rem;
+      font-weight: 700; background: var(--green); color: #0c0c0d;
+      text-decoration: none; border: none; cursor: pointer; display: inline-block;
+      font-family: 'Roboto', sans-serif;
+      transition: opacity 0.18s, transform 0.15s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .btn-solid:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-solid:active { transform: translateY(0); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; padding-top: 58px;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('/brand_assets/Hero%20Image.png');
+      background-size: cover;
+      background-position: center 30%;
+      background-repeat: no-repeat;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 100% at 50% 50%, rgba(10,12,8,0.72) 0%, rgba(10,12,8,0.45) 55%, rgba(10,12,8,0.15) 100%),
+        linear-gradient(to bottom, rgba(10,12,8,0.45) 0%, rgba(10,12,8,0.25) 40%, rgba(10,12,8,0.6) 100%),
+        radial-gradient(ellipse 50% 60% at 50% 50%, rgba(181,245,63,0.03) 0%, transparent 70%);
+    }
+    .hero-noise {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1240px; margin: 0 auto; padding: 5rem 2.5rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-content {
+      max-width: 900px; text-align: center;
+    }
+    .hero h1 {
+      font-family: 'GTAmericaComp', sans-serif;
+      font-size: clamp(4rem, 7.5vw, 7.5rem);
+      font-weight: 700; text-transform: uppercase;
+      line-height: 0.9; letter-spacing: -0.015em;
+      margin-bottom: 1.75rem;
+    }
+    .hero h1 .ac { color: var(--green); }
+    .hero-sub {
+      color: var(--g100); font-size: 1.0625rem; line-height: 1.7;
+      max-width: 480px; margin: 0 auto 2.25rem; text-align: center;
+    }
+    .hero-ctas { display: flex; gap: 0.875rem; align-items: center; justify-content: center; }
+    .hero-img-wrap { position: relative; border-radius: 8px; overflow: hidden; }
+    .hero-img-wrap img { width: 100%; display: block; }
+    .hero-img-wrap::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 55%, rgba(12,12,13,0.65));
+      pointer-events: none;
+    }
+    .hero-badge {
+      position: absolute; bottom: 1.5rem; left: 1.5rem; z-index: 2;
+      background: rgba(12,12,13,0.82);
+      border: 1px solid rgba(181,245,63,0.22);
+      border-radius: 8px; padding: 0.875rem 1.125rem;
+      backdrop-filter: blur(8px);
+    }
+    .hero-badge-num {
+      font-family: 'GTAmericaComp', sans-serif;
+      font-size: 2.25rem; font-weight: 700;
+      color: var(--green); line-height: 1;
+    }
+    .hero-badge-lbl { color: var(--g100); font-size: 0.75rem; margin-top: 0.15rem; }
+
+    /* ── PILL ── */
+    .pill {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--gmuted); border: 1px solid rgba(181,245,63,0.22);
+      border-radius: 99px; padding: 0.3rem 0.875rem;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--green); margin-bottom: 1.5rem;
+    }
+    .pill-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+      animation: blink 2.2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+    /* ── STATS ── */
+    .stats-band { border-top: 1px solid var(--bdr); border-bottom: 1px solid var(--bdr); }
+    .stats-inner {
+      max-width: 1240px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3,1fr);
+    }
+    .stat-cell { padding: 2.25rem 2.75rem; border-right: 1px solid var(--bdr); }
+    .stat-cell:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'GTAmericaComp', sans-serif;
+      font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+      font-weight: 700; color: var(--green); line-height: 1; margin-bottom: 0.4rem;
+      text-shadow: 0 0 32px rgba(181,245,63,0.25);
+    }
+    .stat-lbl { color: var(--g100); font-size: 0.875rem; line-height: 1.5; }
+
+    /* ── LAYOUT ── */
+    .sec { padding: 6rem 2.5rem; }
+    .sec-alt { background: var(--bg2); }
+    .wrap { max-width: 1240px; margin: 0 auto; }
+    .eyebrow {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--green); margin-bottom: 0.875rem;
+    }
+    .heading {
+      font-family: 'GTAmericaComp', sans-serif;
+      font-size: clamp(2.25rem, 4.5vw, 4rem);
+      font-weight: 700; text-transform: uppercase;
+      letter-spacing: -0.01em; line-height: 0.92; margin-bottom: 1.25rem;
+    }
+    .heading .ac { color: var(--green); }
+    .body-text { color: var(--g100); font-size: 1rem; line-height: 1.72; max-width: 520px; }
+
+    /* ── SERVICE CARDS ── */
+    .svc-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1.5px; margin-top: 3rem;
+      background: var(--bdr); border: 1.5px solid var(--bdr);
+      border-radius: 8px; overflow: hidden;
+    }
+    .svc-card {
+      background: var(--bg3); position: relative; overflow: hidden;
+      aspect-ratio: 3/4; display: flex; flex-direction: column;
+      justify-content: flex-end; cursor: pointer;
+    }
+    .svc-card img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .svc-card:hover img { transform: scale(1.06); }
+    .svc-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,10,11,0.92) 0%, rgba(10,10,11,0.42) 55%, rgba(10,10,11,0.1) 100%);
+    }
+    .svc-label-top {
+      position: absolute; top: 1.25rem; left: 1.25rem; z-index: 2;
+      display: inline-block; font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.13em; text-transform: uppercase; color: var(--green);
+      background: var(--gmuted); border: 1px solid rgba(181,245,63,0.2);
+      padding: 0.2rem 0.6rem; border-radius: 3px;
+    }
+    .svc-content { position: relative; z-index: 2; padding: 1.5rem; }
+    .svc-card h3 {
+      font-family: 'GTAmericaComp', sans-serif;
+      font-size: 1.875rem; font-weight: 700;
+      text-transform: uppercase; margin-bottom: 0.5rem; line-height: 1;
+    }
+    .svc-card p { color: var(--g100); font-size: 0.875rem; line-height: 1.5; }
+
+    /* ── SHOWCASE ── */
+    .showcase-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; margin-top: 2.5rem;
+    }
+    .showcase-main { position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 4/3; }
+    .showcase-main img { width:100%; height:100%; object-fit:cover; }
+    .showcase-main::after {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to top, rgba(10,10,11,0.85) 0%, transparent 55%);
+    }
+    .showcase-info { position: absolute; bottom: 1.5rem; left: 1.5rem; z-index: 3; }
+    .showcase-info h3 {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.5rem; font-weight: 700; text-transform: uppercase;
+    }
+    .showcase-info p { color: var(--g100); font-size: 0.8125rem; margin-top: 0.2rem; }
+    .thumb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .thumb { position: relative; border-radius: 6px; overflow: hidden; aspect-ratio: 1; cursor: pointer; }
+    .thumb img { width:100%; height:100%; object-fit:cover; }
+    .thumb::after {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to top, rgba(10,10,11,0.8), transparent 60%);
+    }
+    .thumb-lbl {
+      position: absolute; bottom: 0.75rem; left: 0.75rem; z-index: 3;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.875rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    /* Bento box image crossfade */
+    .box-img-base,
+    .box-img-hover {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .box-img-hover {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    .thumb:hover .box-img-hover,
+    .showcase-main:hover .box-img-hover { opacity: 1; }
+
+    /* ── MARQUEE ── */
+    .marquee-band {
+      border-top: 1px solid var(--bdr); border-bottom: 1px solid var(--bdr);
+      padding: 1.375rem 0; overflow: hidden;
+    }
+    .marquee-track {
+      display: flex; gap: 2.5rem; width: max-content; align-items: center;
+      animation: scroll 40s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .m-logo-img {
+      height: 28px; width: auto; max-width: 160px;
+      object-fit: contain; flex-shrink: 0;
+      filter: brightness(0) invert(1);
+      opacity: 0.4;
+      transition: opacity 0.18s;
+    }
+    /* Portrait/emblem logos get extra height so optical weight matches wordmarks */
+    .m-logo-tall {
+      height: 42px; max-width: 80px;
+    }
+    .m-logo-img:hover { opacity: 0.85; }
+    .m-sep { color: var(--g300); line-height: 1; font-size: 0.5rem; }
+
+    /* ── PROCESS ── */
+    .process-grid {
+      display: grid; grid-template-columns: repeat(5,1fr);
+      gap: 1.5px; margin-top: 3rem;
+      background: var(--bdr); border: 1.5px solid var(--bdr);
+      border-radius: 8px; overflow: hidden;
+    }
+    .p-step {
+      background: var(--bg); padding: 2rem 1.5rem; position: relative;
+      transition: background 0.2s;
+    }
+    .p-step:hover { background: var(--bg3); }
+    .p-step-num {
+      font-family: 'GTAmericaComp', sans-serif;
+      font-size: 4.5rem; font-weight: 700;
+      color: rgba(255,255,255,0.05); line-height: 1; margin-bottom: 0.875rem;
+    }
+    .p-step-dot {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+      box-shadow: 0 0 8px rgba(181,245,63,0.6);
+    }
+    .p-step h4 {
+      font-family: 'GTAmericaComp', sans-serif;
+      font-size: 1.375rem; font-weight: 700;
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .p-step p { color: var(--g200); font-size: 0.8125rem; line-height: 1.6; }
+
+    /* ── PRINCIPLES ── */
+    .prin-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; margin-top: 3rem;
+      background: var(--bdr); border: 1px solid var(--bdr);
+      border-radius: 8px; overflow: hidden;
+    }
+    .prin-item { background: var(--bg); padding: 2rem 1.875rem 2.25rem; transition: background 0.2s; }
+    .prin-item:hover { background: var(--bg3); }
+    .prin-icon { width: 38px; height: 38px; color: var(--green); margin-bottom: 1rem; }
+    .prin-icon-iso { width: 42px; height: 38px; }
+    .prin-item h4 {
+      font-family: 'GTAmericaComp', sans-serif;
+      font-size: 1.375rem; font-weight: 700;
+      text-transform: uppercase; margin-bottom: 0.4rem;
+    }
+    .prin-item p { color: var(--g200); font-size: 0.875rem; line-height: 1.6; }
+
+    /* ── DIFF / VERT INTEGRATION ── */
+    .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .diff-feats { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2.25rem; }
+    .diff-feat {
+      display: flex; gap: 1rem; padding: 1.25rem;
+      border: 1px solid var(--bdr); border-radius: 6px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .diff-feat:hover { border-color: rgba(181,245,63,0.22); background: rgba(181,245,63,0.025); }
+    .diff-feat-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: var(--gmuted); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center; color: var(--green);
+    }
+    .diff-feat h5 { font-weight: 700; font-size: 0.9375rem; margin-bottom: 0.25rem; }
+    .diff-feat p { color: var(--g200); font-size: 0.8125rem; line-height: 1.6; }
+    .diff-visual { position: relative; border-radius: 8px; overflow: visible; }
+    .diff-visual img { width:100%; display:block; border-radius:8px; }
+    .diff-badge {
+      position: absolute; top: 1.5rem; right: -0.75rem;
+      background: var(--bg); border: 1px solid rgba(181,245,63,0.22);
+      border-radius: 8px; padding: 1rem 1.25rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+    .diff-badge-num {
+      font-family: 'GTAmericaComp', sans-serif;
+      font-size: 2rem; font-weight: 700; color: var(--green); line-height: 1;
+      text-shadow: 0 0 20px rgba(181,245,63,0.3);
+    }
+    .diff-badge-lbl { color: var(--g100); font-size: 0.7rem; margin-top: 0.2rem; }
+
+    /* ── CTA SPLIT ── */
+    .cta-split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5px; margin-top: 3rem;
+      background: var(--bdr); border: 1.5px solid var(--bdr);
+      border-radius: 8px; overflow: hidden;
+    }
+    .cta-card { background: var(--bg3); padding: 3rem; }
+    .cta-ey {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--green); margin-bottom: 0.75rem;
+    }
+    .cta-card h3 {
+      font-family: 'GTAmericaComp', sans-serif;
+      font-size: 2rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .cta-card > p { color: var(--g100); font-size: 0.9rem; line-height: 1.65; margin-bottom: 1.5rem; }
+    .cta-ul { list-style: none; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .cta-ul li {
+      color: var(--g100); font-size: 0.875rem;
+      display: flex; align-items: center; gap: 0.625rem;
+    }
+    .cta-ul li::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green); flex-shrink: 0;
+    }
+
+    /* ── GLOW SECTION ── */
+    .glow-sec {
+      position: relative; overflow: hidden;
+      padding: 8rem 2.5rem; text-align: center; background: var(--bg);
+    }
+    .glow-orb {
+      position: absolute; bottom: -40%; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(181,245,63,0.18) 0%, rgba(181,245,63,0.04) 45%, transparent 70%);
+      pointer-events: none;
+    }
+    .glow-ring {
+      position: absolute; bottom: -38%; left: 50%; transform: translateX(-50%);
+      width: 520px; height: 520px; border-radius: 50%;
+      border: 1px solid rgba(181,245,63,0.18);
+      box-shadow: 0 0 60px rgba(181,245,63,0.12), inset 0 0 60px rgba(181,245,63,0.06);
+      pointer-events: none;
+    }
+    .glow-ring2 {
+      position: absolute; bottom: -42%; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px; border-radius: 50%;
+      border: 1px solid rgba(181,245,63,0.07); pointer-events: none;
+    }
+
+    /* ── NEWSLETTER ── */
+    .nl-band {
+      background: var(--gmuted);
+      border-top: 1px solid rgba(181,245,63,0.15);
+      border-bottom: 1px solid rgba(181,245,63,0.15);
+      padding: 3.5rem 2.5rem;
+    }
+    .nl-inner {
+      max-width: 1240px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+    }
+    .nl-title {
+      font-family: 'GTAmericaComp', sans-serif;
+      font-size: 1.875rem; font-weight: 700;
+      text-transform: uppercase; margin-bottom: 0.25rem;
+    }
+    .nl-sub { color: rgba(181,245,63,0.65); font-size: 0.875rem; }
+    .nl-form { display: flex; gap: 0.75rem; }
+    .nl-input {
+      background: rgba(0,0,0,0.28); border: 1px solid rgba(181,245,63,0.28);
+      color: white; padding: 0.6rem 1.25rem; border-radius: 4px;
+      font-size: 0.875rem; min-width: 260px; outline: none;
+      font-family: 'GTAmerica', sans-serif; transition: border-color 0.18s;
+    }
+    .nl-input:focus { border-color: var(--green); }
+    .nl-input::placeholder { color: rgba(255,255,255,0.35); }
+
+    /* ── FOOTER ── */
+    footer { padding: 4.5rem 2.5rem 2rem; border-top: 1px solid var(--bdr); }
+    .ft-top {
+      max-width: 1240px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 4rem;
+    }
+    .ft-desc { color: var(--g200); font-size: 0.875rem; line-height: 1.65; margin-top: 1rem; }
+    .ft-col h5 {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.13em;
+      text-transform: uppercase; color: var(--g100); margin-bottom: 1.25rem;
+    }
+    .ft-links { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; }
+    .ft-links a {
+      color: var(--g200); text-decoration: none; font-size: 0.875rem;
+      transition: color 0.18s;
+    }
+    .ft-links a:hover { color: var(--white); }
+    .ft-bottom {
+      max-width: 1240px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .ft-legal { color: var(--g200); font-size: 0.8125rem; }
+    .ft-leg-links { display: flex; gap: 1.5rem; }
+    .ft-leg-links a {
+      color: var(--g200); text-decoration: none; font-size: 0.8125rem;
+      transition: color 0.18s;
+    }
+    .ft-leg-links a:hover { color: white; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(18px); }
+      to   { opacity:1; transform:none; }
+    }
+    .fu { opacity:0; animation: fadeUp 0.65s cubic-bezier(0.25,0.46,0.45,0.94) forwards; }
+
+    .rv {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.65s cubic-bezier(0.25,0.46,0.45,0.94),
+                  transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .rv.on { opacity: 1; transform: none; }
+
+    /* ── PROCESS ACCORDION ── */
+    .proc-layout {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .proc-info {
+      margin-top: 2.25rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--bdr);
+    }
+    .proc-info-inner {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      transition: opacity 0.28s cubic-bezier(0.25,0.46,0.45,0.94),
+                  transform 0.28s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .proc-info-inner.fade-out { opacity: 0; transform: translateY(8px); }
+    .proc-info-num {
+      font-family: 'GTAmericaComp', sans-serif;
+      font-size: 4rem; font-weight: 700; line-height: 1;
+      color: rgba(181,245,63,0.12);
+      flex-shrink: 0; min-width: 3rem; user-select: none;
+    }
+    .proc-info-title {
+      font-family: 'GTAmericaComp', sans-serif;
+      font-size: 1.625rem; font-weight: 700;
+      text-transform: uppercase; margin-bottom: 0.5rem; line-height: 1.1;
+    }
+    .proc-info-desc { color: var(--g200); font-size: 0.875rem; line-height: 1.65; }
+
+    .proc-accordion-wrap {
+      display: flex; gap: 6px; height: 520px; overflow: hidden;
+    }
+    .proc-panel {
+      flex: 0 0 52px;
+      position: relative; overflow: hidden; border-radius: 10px; cursor: pointer;
+      transition: flex-grow 0.65s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .proc-panel.active { flex-grow: 1; }
+    .proc-panel img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .proc-panel:hover img { transform: scale(1.04); }
+    .proc-panel-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top,
+        rgba(10,10,11,0.9) 0%, rgba(10,10,11,0.3) 52%, rgba(10,10,11,0.12) 100%);
+    }
+    .proc-panel-content { position: absolute; inset: 0; pointer-events: none; }
+    .proc-panel-num {
+      font-family: 'GTAmericaComp', sans-serif;
+      font-size: 3.5rem; font-weight: 700;
+      color: rgba(255,255,255,1); line-height: 1;
+      position: absolute; top: 1rem; left: 1rem;
+      transition: color 0.4s; user-select: none;
+    }
+    .proc-panel.active .proc-panel-num { color: rgba(181,245,63,1); }
+    .proc-panel-dot {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green); opacity: 0;
+      box-shadow: 0 0 8px rgba(181,245,63,0.7);
+      transition: opacity 0.35s;
+    }
+    .proc-panel.active .proc-panel-dot { opacity: 1; }
+    .proc-panel-title {
+      position: absolute;
+      font-family: 'GTAmericaComp', sans-serif;
+      font-size: 1.0625rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      color: white; white-space: nowrap;
+      left: 50%; bottom: 5.5rem;
+      transform: translateX(-50%) rotate(90deg);
+      opacity: 0.7;
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94),
+                  bottom 0.55s cubic-bezier(0.25,0.46,0.45,0.94),
+                  opacity 0.35s;
+    }
+    .proc-panel.active .proc-panel-title {
+      bottom: 1.5rem;
+      transform: translateX(-50%) rotate(0deg);
+      opacity: 1;
+    }
+
+    /* ── HAMBURGER ── */
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 6px;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: transform 0.22s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.18s;
+    }
+    .nav.open .nav-hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav.open .nav-hamburger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav.open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── RESPONSIVE: PROCESS ACCORDION ── */
+    @media (max-width: 1024px) {
+      .proc-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .proc-accordion-wrap { height: 420px; }
+    }
+    @media (max-width: 768px) {
+      .proc-accordion-wrap { height: 300px; gap: 4px; }
+      .proc-panel { flex: 0 0 44px; border-radius: 8px; }
+      .proc-panel-num { font-size: 2.5rem; top: 0.75rem; left: 0.75rem; }
+      .proc-panel-title { font-size: 0.875rem; bottom: 4.5rem; }
+      .proc-panel.active .proc-panel-title { font-size: 1.125rem; bottom: 1.25rem; }
+      .proc-info-num { font-size: 3rem; }
+      .proc-info-title { font-size: 1.375rem; }
+    }
+    @media (max-width: 480px) {
+      .proc-accordion-wrap { height: 240px; gap: 3px; }
+      .proc-panel { flex: 0 0 36px; border-radius: 7px; }
+      .proc-panel-num { font-size: 1.75rem; }
+      .proc-panel-title { font-size: 0.75rem; }
+      .proc-panel.active .proc-panel-title { font-size: 1rem; }
+    }
+
+    /* ── RESPONSIVE: TABLET (≤1024px) ── */
+    @media (max-width: 1024px) {
+      .hero-inner {
+        padding: 4rem 2rem 5rem;
+      }
+      .hero-content { max-width: 100%; }
+      .hero h1 { font-size: clamp(3.5rem, 8vw, 5.5rem); }
+      .hero-sub { max-width: 100%; }
+
+      .svc-grid { grid-template-columns: repeat(2, 1fr); }
+      .svc-card { aspect-ratio: 4/5; }
+
+      .process-grid { grid-template-columns: repeat(3, 1fr); }
+
+      .prin-head-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+      .prin-head-grid .body-text { margin-top: 0 !important; }
+
+      .diff-grid { gap: 3rem; }
+
+      .ft-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+
+    /* ── RESPONSIVE: MOBILE (≤768px) ── */
+    @media (max-width: 768px) {
+      /* Nav */
+      .nav { padding: 0 1.25rem; }
+      .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute; top: 58px; left: 0; right: 0;
+        background: rgba(12,12,13,0.97);
+        backdrop-filter: blur(16px) saturate(1.4);
+        border-bottom: 1px solid var(--bdr);
+        flex-direction: column; gap: 0;
+        padding: 0.5rem 1.25rem 1.25rem;
+        list-style: none;
+      }
+      .nav.open .nav-links { display: flex; }
+      .nav-links li { border-bottom: 1px solid var(--bdr); }
+      .nav-links li:last-child { border-bottom: none; }
+      .nav-links a { display: block; padding: 0.875rem 0; font-size: 1rem; }
+
+      /* Sections */
+      .sec { padding: 3.5rem 1.25rem; }
+      .glow-sec { padding: 5rem 1.25rem; }
+
+      /* Hero */
+      .hero-inner {
+        padding: 2.5rem 1.25rem 4rem;
+      }
+      .hero h1 { font-size: clamp(2.75rem, 11vw, 4rem); }
+
+      /* Stats: keep 3-col down to 480px */
+      .stats-inner { grid-template-columns: repeat(3, 1fr); }
+      .stat-cell { padding: 1.75rem 1.25rem; }
+
+      /* Services: keep 2-col at tablet, 1-col only below 480px */
+      .svc-grid { grid-template-columns: repeat(2, 1fr); }
+      .svc-card { aspect-ratio: 4/3; }
+
+      /* Showcase */
+      .showcase-grid { grid-template-columns: 1fr; }
+      .showcase-main { aspect-ratio: 16/9; }
+
+      /* Process */
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+
+      /* Principles header */
+      .prin-head-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+      }
+      .prin-head-grid .body-text { margin-top: 0 !important; }
+
+      /* Principles grid */
+      .prin-grid { grid-template-columns: 1fr; }
+
+      /* Vertical Integration */
+      .diff-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .diff-visual { order: -1; }
+      .diff-badge { right: 1rem; top: 1rem; }
+
+      /* CTA Split */
+      .cta-split { grid-template-columns: 1fr; }
+      .cta-card { padding: 2rem 1.5rem; }
+      .cta-card + .cta-card {
+        border-left: none !important;
+        border-top: 1.5px solid var(--bdr);
+      }
+
+      /* Glow orbs */
+      .glow-orb { width: 300px; height: 300px; }
+      .glow-ring { width: 260px; height: 260px; }
+      .glow-ring2 { width: 400px; height: 400px; }
+
+      /* Newsletter */
+      .nl-band { padding: 2.5rem 1.25rem; }
+      .nl-inner { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .nl-form { flex-direction: column; width: 100%; }
+      .nl-input { min-width: unset; width: 100%; }
+      .nl-form .btn-solid { width: 100%; text-align: center; padding: 0.65rem; }
+
+      /* Footer */
+      .ft-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      footer { padding: 3rem 1.25rem 1.75rem; }
+      .ft-bottom { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    }
+
+    /* ── RESPONSIVE: SMALL MOBILE (≤480px) ── */
+    @media (max-width: 480px) {
+      .nav { padding: 0 1rem; }
+      .sec { padding: 3rem 1rem; }
+      .glow-sec { padding: 4rem 1rem; }
+      .hero-inner { padding: 2rem 1rem 3.5rem; }
+
+      .process-grid { grid-template-columns: 1fr; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .svc-card { aspect-ratio: 4/3; }
+      .stats-inner { grid-template-columns: 1fr; }
+      .stat-cell {
+        border-right: none;
+        border-bottom: 1px solid var(--bdr);
+        padding: 1.5rem 1rem;
+      }
+      .stat-cell:last-child { border-bottom: none; }
+      .ft-top { grid-template-columns: 1fr; gap: 1.5rem; }
+      footer { padding: 2.5rem 1rem 1.5rem; }
+
+      .diff-badge { position: static; margin-top: 1rem; display: inline-block; }
+      .diff-visual { overflow: visible; }
+
+      .svc-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ NAV ══════════════ -->
+<nav class="nav">
+  <a href="#" class="nav-logo" aria-label="Cotapaxi home">
+    <img src="/brand_assets/Cotapaxi%20Logo.svg" alt="Cotapaxi" style="height:36px;width:auto;display:block">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#principles">Principles</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="btn-solid nav-cta" style="padding:0.4rem 1rem">Get Started</a>
+  <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="pill fu" style="animation-delay:0.06s">
+        <span class="pill-dot"></span>
+        Custom Manufacturing &amp; Design
+      </div>
+      <h1 class="fu" style="animation-delay:0.18s">
+        Taking <span class="ac">Brands</span><br>To The <span class="ac">Next Level</span>
+      </h1>
+      <p class="hero-sub fu" style="animation-delay:0.3s">
+        Cotapaxi specialises in custom design and manufacturing, offering a wide range of promotional products to help you stand out from the competition. We bring your vision to life.
+      </p>
+      <div class="hero-ctas fu" style="animation-delay:0.44s">
+        <a href="#contact" class="btn-solid" style="padding:0.65rem 1.5rem;font-size:0.9375rem">Get Started</a>
+        <a href="#portfolio" class="btn-ghost" style="padding:0.65rem 1.5rem;font-size:0.9375rem">View Our Work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ STATS ══════════════ -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="stat-cell rv">
+      <div class="stat-num">No MOQ</div>
+      <div class="stat-lbl">No minimum order quantities —<br>order exactly what you need</div>
+    </div>
+    <div class="stat-cell rv" style="transition-delay:0.1s">
+      <div class="stat-num">ISO</div>
+      <div class="stat-lbl">ISO certified manufacturing guarantees<br>consistent quality on every order</div>
+    </div>
+    <div class="stat-cell rv" style="transition-delay:0.2s">
+      <div class="stat-num">10+</div>
+      <div class="stat-lbl">Years of expertise in custom design<br>and promotional product manufacturing</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SERVICES ══════════════ -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <p class="eyebrow rv">Services We Offer</p>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap">
+      <h2 class="heading rv" style="margin-bottom:0">
+        Everything<br>Your Brand<br><span class="ac">Needs</span>
+      </h2>
+      <p class="body-text rv" style="transition-delay:0.14s;max-width:380px">
+        From initial concept to final delivery, Cotapaxi handles every step — manufacturing, sourcing, and logistics — under one roof, with full quality control throughout.
+      </p>
+    </div>
+    <div class="svc-grid rv" style="transition-delay:0.1s">
+      <div class="svc-card">
+        <img src="/brand_assets/Services%20we%20Offer/Manufacturing.png" alt="Manufacturing">
+        <div class="svc-overlay"></div>
+        <span class="svc-label-top">In-House</span>
+        <div class="svc-content">
+          <h3>Manufacturing</h3>
+          <p>State of the art production for custom promotional products, fitness gear, and branded merchandise — patented designs included.</p>
+        </div>
+      </div>
+      <div class="svc-card">
+        <img src="/brand_assets/Services%20we%20Offer/Sourcing.png" alt="Sourcing">
+        <div class="svc-overlay"></div>
+        <span class="svc-label-top">Global Network</span>
+        <div class="svc-content">
+          <h3>Sourcing</h3>
+          <p>A worldwide network of ISO certified, carefully vetted suppliers ensuring premium materials at competitive, factory direct prices.</p>
+        </div>
+      </div>
+      <div class="svc-card">
+        <img src="/brand_assets/Services%20we%20Offer/Logistics.png" alt="Logistics">
+        <div class="svc-overlay"></div>
+        <span class="svc-label-top">End to End</span>
+        <div class="svc-content">
+          <h3>Logistics</h3>
+          <p>Complete air, ground, and sea freight solutions — your products reach any corner of the globe, on time and in perfect condition.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ PORTFOLIO ══════════════ -->
+<section class="sec sec-alt" id="portfolio" style="padding-top:0">
+  <div class="wrap">
+    <hr style="border:none;border-top:1px solid var(--bdr);margin-bottom:4rem">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:2.5rem;flex-wrap:wrap">
+      <div>
+        <p class="eyebrow rv">Previous Collaborations</p>
+        <h2 class="heading rv" style="margin-bottom:0">
+          See How We've<br><span class="ac">Helped Brands</span><br>Stand Out
+        </h2>
+      </div>
+      <a href="#" class="btn-ghost rv" style="transition-delay:0.14s;flex-shrink:0;padding:0.6rem 1.5rem">View All Projects</a>
+    </div>
+    <div class="showcase-grid rv">
+      <div class="showcase-main">
+        <img class="box-img-base" src="/brand_assets/sports-fitness-1.png" alt="Sports and Fitness Collection">
+        <img class="box-img-hover" src="/brand_assets/sports-fitness-2.png" alt="Sports and Fitness Collection">
+        <div class="showcase-info">
+          <h3>Sports &amp; Fitness Collection</h3>
+          <p>Patented designs for leading athletic brands worldwide</p>
+        </div>
+      </div>
+      <div class="thumb-grid">
+        <div class="thumb">
+          <img class="box-img-base" src="/brand_assets/custom-hats-1.png" alt="Custom Hats">
+          <img class="box-img-hover" src="/brand_assets/custom-hat-2.png" alt="Custom Hats">
+          <div class="thumb-lbl">Custom Hats</div>
+        </div>
+        <div class="thumb">
+          <img class="box-img-base" src="/brand_assets/bags-1.png" alt="Bags and Backpacks">
+          <img class="box-img-hover" src="/brand_assets/bags-2.png" alt="Bags and Backpacks">
+          <div class="thumb-lbl">Bags &amp; Backpacks</div>
+        </div>
+        <div class="thumb">
+          <img class="box-img-base" src="/brand_assets/branded-apparel-1.png" alt="Branded Apparel">
+          <img class="box-img-hover" src="/brand_assets/branded-apparel-2.png" alt="Branded Apparel">
+          <div class="thumb-lbl">Branded Apparel</div>
+        </div>
+        <div class="thumb">
+          <img class="box-img-base" src="/brand_assets/promo-item-1.png" alt="Promo Items">
+          <img class="box-img-hover" src="/brand_assets/promo-item-2.png" alt="Promo Items">
+          <div class="thumb-lbl">Promo Items</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ MARQUEE ══════════════ -->
+<div class="marquee-band">
+  <div class="marquee-track">
+    <img class="m-logo-img" src="/brand_assets/SVG/Absolut%20SVG.svg"           alt="Absolut"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/BeefEater%20SVG.svg"          alt="Beefeater"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/Chivas%20SVG.svg"             alt="Chivas"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/Daddario%20SVG.svg"           alt="D'Addario"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/Fomoowa%20SVG.svg"            alt="Fomoowa"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/HG%20SVG.svg"                 alt="HG"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/MLB%20SVG.svg"                alt="MLB"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/Muscle%20Tech%20SVG.svg"      alt="Muscle Tech"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/Nutrabio%20SVG.svg"           alt="NutraBio"><span class="m-sep">◆</span>
+    <img class="m-logo-img m-logo-tall" src="/brand_assets/SVG/NY%20Mets%20SVG.svg"          alt="NY Mets"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/RAW%20SVG.svg"                alt="RAW"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/Yuengling%20SVG.svg"          alt="Yuengling"><span class="m-sep">◆</span>
+    <!-- Duplicate set for seamless infinite loop -->
+    <img class="m-logo-img" src="/brand_assets/SVG/Absolut%20SVG.svg"           alt="Absolut"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/BeefEater%20SVG.svg"          alt="Beefeater"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/Chivas%20SVG.svg"             alt="Chivas"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/Daddario%20SVG.svg"           alt="D'Addario"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/Fomoowa%20SVG.svg"            alt="Fomoowa"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/HG%20SVG.svg"                 alt="HG"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/MLB%20SVG.svg"                alt="MLB"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/Muscle%20Tech%20SVG.svg"      alt="Muscle Tech"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/Nutrabio%20SVG.svg"           alt="NutraBio"><span class="m-sep">◆</span>
+    <img class="m-logo-img m-logo-tall" src="/brand_assets/SVG/NY%20Mets%20SVG.svg"          alt="NY Mets"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/RAW%20SVG.svg"                alt="RAW"><span class="m-sep">◆</span>
+    <img class="m-logo-img" src="/brand_assets/SVG/Yuengling%20SVG.svg"          alt="Yuengling"><span class="m-sep">◆</span>
+  </div>
+</div>
+
+<!-- ══════════════ DESIGN PROCESS ══════════════ -->
+<section class="sec sec-alt" id="process">
+  <div class="wrap">
+    <div class="proc-layout rv">
+
+      <!-- Left: text + animated step info -->
+      <div class="proc-text">
+        <p class="eyebrow">How It Works</p>
+        <h2 class="heading" style="margin-bottom:1.25rem">
+          Our Design<br><span class="ac">Process</span>
+        </h2>
+        <p class="body-text">
+          A transparent five step journey from your first brief to final delivery — with collaboration and quality assurance built in at every stage.
+        </p>
+        <div class="proc-info">
+          <div class="proc-info-inner" id="procInfoInner">
+            <div class="proc-info-num" id="procNum">01</div>
+            <div>
+              <h4 class="proc-info-title" id="procTitle">Briefing</h4>
+              <p class="proc-info-desc" id="procDesc">We learn your brand goals, budget, timeline, and target audience to lay the strategic foundation for your product.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: image accordion -->
+      <div class="proc-accordion-wrap" id="procAccordion">
+        <div class="proc-panel active" data-index="0">
+          <img src="brand_assets/Our%20Design%20Process/Briefing.png" alt="Briefing" style="object-position: center center">
+          <div class="proc-panel-overlay"></div>
+          <div class="proc-panel-content">
+            <div class="proc-panel-num">01</div>
+            <div class="proc-panel-dot"></div>
+            <span class="proc-panel-title">Briefing</span>
+          </div>
+        </div>
+        <div class="proc-panel" data-index="1">
+          <img src="brand_assets/Our%20Design%20Process/Ideation.png" alt="Ideation" style="object-position: right center">
+          <div class="proc-panel-overlay"></div>
+          <div class="proc-panel-content">
+            <div class="proc-panel-num">02</div>
+            <div class="proc-panel-dot"></div>
+            <span class="proc-panel-title">Ideation</span>
+          </div>
+        </div>
+        <div class="proc-panel" data-index="2">
+          <img src="brand_assets/Our%20Design%20Process/Modeling.png" alt="Modeling" style="filter:grayscale(1)">
+          <div class="proc-panel-overlay"></div>
+          <div class="proc-panel-content">
+            <div class="proc-panel-num">03</div>
+            <div class="proc-panel-dot"></div>
+            <span class="proc-panel-title">Modeling</span>
+          </div>
+        </div>
+        <div class="proc-panel" data-index="3">
+          <img src="brand_assets/Our%20Design%20Process/Prototyping.png" alt="Prototyping" style="filter:grayscale(1)">
+          <div class="proc-panel-overlay"></div>
+          <div class="proc-panel-content">
+            <div class="proc-panel-num">04</div>
+            <div class="proc-panel-dot"></div>
+            <span class="proc-panel-title">Prototyping</span>
+          </div>
+        </div>
+        <div class="proc-panel" data-index="4">
+          <img src="brand_assets/Our%20Design%20Process/Production.png" alt="Production" style="object-position: right center">
+          <div class="proc-panel-overlay"></div>
+          <div class="proc-panel-content">
+            <div class="proc-panel-num">05</div>
+            <div class="proc-panel-dot"></div>
+            <span class="proc-panel-title">Production</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ GUIDING PRINCIPLES ══════════════ -->
+<section class="sec" id="principles">
+  <div class="wrap">
+    <div class="prin-head-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-bottom:0.5rem">
+      <div>
+        <p class="eyebrow rv">Why Cotapaxi</p>
+        <h2 class="heading rv" style="margin-bottom:0">
+          Our Guiding<br><span class="ac">Principles</span>
+        </h2>
+      </div>
+      <p class="body-text rv" style="margin-top:4rem">
+        At Cotapaxi, we specialise in Fitness and Sports Giveaways, patented items, and branded merchandise across many fields. Our attention to detail and expertise means your vision becomes reality — every time.
+      </p>
+    </div>
+    <div class="prin-grid rv" style="transition-delay:0.1s">
+      <div class="prin-item">
+        <!-- Phosphor: package-fill — No MOQ -->
+        <svg class="prin-icon" viewBox="0 0 256 256" fill="currentColor">
+          <path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.35,44L178.57,92.29l-80.35-44Zm0,88L47.65,76,81.56,57.43l80.35,44Zm88,55.85h0l-80,43.79V133.83l32-17.51V152a8,8,0,0,0,16,0V107.56l32-17.51v85.76Z"/>
+        </svg>
+        <h4>No Minimum Orders</h4>
+        <p>Order exactly what you need — 1 piece or 100,000. No MOQ restrictions ever hold your brand back.</p>
+      </div>
+      <div class="prin-item">
+        <!-- Official ISO logo — Wikimedia Commons (CC BY-SA 4.0) -->
+        <svg class="prin-icon prin-icon-iso" viewBox="0 0 1181 1087" xmlns="http://www.w3.org/2000/svg" aria-label="ISO">
+          <g fill="currentColor">
+            <path d="m0 543.5v543.5h590.5 590.5v-543.5-543.5h-590.5-590.5v543.5zm612.5-418.1c28.2 1 61.8 6.5 91.8 15.1 92.2 26.4 171.2 83.7 228 165.1 3.1 4.5 5.7 8.7 5.7 9.3 0 0.8-4.5 1.1-14.4 1.1h-14.4l-4.6-6.5c-12.7-17.6-37.5-45.2-53.8-59.7l-7-6.2-17.1 4.3c-30.6 7.5-64.3 13.6-97.9 17.7-7.6 1-13.8 2.1-13.8 2.4 0 0.4 1.4 5.2 3.1 10.6 3.9 12.9 9.9 34.5 9.9 36.1 0 1-3.1 1.3-12.5 1.3h-12.4l-1.7-5.8c-0.8-3.1-2.5-8.9-3.5-12.7-3.2-11-8.1-25.9-8.9-26.8-0.4-0.5-7-0.4-14.6 0.2-7.5 0.6-28.8 1.6-47.2 2.3-35.3 1.2-85 0.1-118.2-2.7-8.5-0.7-15.8-1-16.2-0.6-0.8 0.8-8 23.3-11.4 36l-2.7 10.1h-12.3c-11.3 0-12.4-0.2-12.4-1.8 0-2.2 5.7-23.4 10-37.1 1.7-5.2 2.7-9.8 2.2-10.2-0.4-0.3-5.4-1.2-11.2-1.8-27.3-3.1-66.9-10.4-97.2-17.8l-18.7-4.6-5.3 4.5c-16.1 13.8-42 42.2-55.3 60.5l-6 8.3h-14.7c-8.2 0-14.8-0.3-14.8-0.6 0-1.3 16-23.5 25-34.9 38.4-48.1 85.4-85.9 141-113.4 42.4-21 83.8-33.3 132.5-39.6 12.3-1.6 44.9-3.3 52.5-2.8 1.9 0.1 10.3 0.5 18.5 0.7zm-47 228.7c15.6 1.9 24.4 2.3 66.3 2.6l48.2 0.4v54 53.9h-43-42.9l-0.3-11.7-0.3-11.8-6-2.4c-17.2-6.8-40.3-10.5-66-10.6-25.3 0-36.7 2.2-47.6 9.5-11.2 7.3-12.8 22.2-3.5 31.4 9.7 9.8 21.6 12.9 74.6 19.5 45.8 5.8 63.5 9.5 85.7 18.2 10.7 4.2 24.2 12.1 32.6 19.2 12.4 10.3 22.6 27.3 27.3 45.3 3.5 13.4 4.5 39.2 2 52.9-4.3 23.4-13.1 40.2-29.2 55.5-17.4 16.6-39.8 27.5-70.7 34.4-34.1 7.7-82.4 8.9-130.8 3.4-16.6-1.8-26.2-2.2-66.1-2.5l-46.8-0.4v-53.5-53.4h43 43v11 11l3.9 2c12.7 6.4 38.8 11.1 66.3 11.7 47.4 1.2 68.7-7.2 68.8-27.2 0-7.8-2.2-12-8.8-16.6-9.6-6.8-23.1-9.9-66.2-15.4-51.8-6.7-72.3-11.4-94.8-22-35.9-17-53.6-42.9-57.2-83.7-2-21.6 1.5-41.8 10-59.4 19.1-39.5 62.8-62.2 130.5-67.8 13.6-1.1 60.6 0.4 78 2.5zm378.5-0.6c44.6 6.7 80.1 23.5 107.6 50.9 33.5 33.5 49.7 76.5 49.6 131.6 0 26.4-2.9 46.2-9.8 67-23.5 70.6-84.4 112.8-170.1 117.9-44.9 2.6-90.6-6.3-123.3-24.1-22.1-12-45.6-33.1-58.3-52.3-15.4-23.4-24.9-50.2-28.7-81.5-1.5-12.5-1.2-44.1 0.5-57.2 8.2-62 41.4-109 94.8-134.3 22.3-10.5 46.4-16.8 76.2-19.9 10-1 50.5 0.2 61.5 1.9zm-621 49v44.5h-29-29v90 90h29 29v44.5 44.5l-115.2-0.2-115.3-0.3-0.3-44.3-0.2-44.2h29 29v-90-90l-28.7-0.2-28.8-0.3-0.3-44.3-0.2-44.2h115.5 115.5v44.5zm-47 360.2c12.7 18 40.5 48.9 56.2 62.5l5.7 4.9 16.3-4c31.3-7.7 62.3-13.4 94.3-17.3 9.9-1.2 18.1-2.3 18.3-2.4s-1.1-4.6-2.8-10.1c-4.1-12.9-10-34.3-10-36.5 0-1.6 1.2-1.8 12.4-1.8h12.3l2.7 9.7c1.5 5.4 4.6 15.8 6.8 23.2l4.2 13.3 5.6-0.6c32.3-3.3 116.5-4.2 156-1.6 12.4 0.8 25.4 1.5 28.9 1.5h6.5l3.4-10.5c1.9-5.8 4.9-15.9 6.7-22.5l3.3-12 12.6-0.3c8.4-0.2 12.6 0.1 12.6 0.8 0 1.7-8.7 32.9-11.4 40.7l-2.5 7.2 3.2 0.5c1.8 0.3 8.8 1.3 15.7 2.1 29.3 3.7 65.7 10.6 93.3 17.6 14.3 3.7 16 3.9 18 2.6 4.8-3.2 26.4-24.7 36.8-36.4 6-6.9 14.8-17.6 19.5-23.9l8.7-11.4h14.3c7.9 0 14.4 0.4 14.4 0.8 0 1.3-13.2 20.3-20.9 30.2-69 88.9-170.9 145.7-283.6 158.2-18.6 2-72.4 1.7-90-0.5-91.5-11.8-168.6-47.8-235.5-110-23-21.4-51.8-56-64.4-77.5-0.6-0.9 2.5-1.2 14.2-1.2h14.9l3.3 4.7z"/>
+            <path d="m576.9 150.3c-23.1 7.9-45.1 32.9-65.3 74.2-4.6 9.3-8.6 17.8-8.9 18.7-0.5 1.4 0.3 1.8 4.6 2.3 24.8 2.7 89.8 4.1 125.2 2.6 42.5-1.8 46.5-2.1 46.5-4 0-2.5-15-32.6-21.4-42.8-13-21-25.9-35.6-39.1-44.3-13.9-9-28-11.3-41.6-6.7z"/>
+            <path d="m521 154.2c-53.6 11.3-97.4 29.4-143.2 59.4-11.2 7.3-14.8 10.4-12 10.4 0.4 0 6.8 1.4 14.2 3 24.2 5.5 74.7 13.8 92.3 15.2l3.8 0.3 4.2-10c12.2-28.5 31.2-59.6 46.6-75.8 3.4-3.6 3.4-3.7 1.1-3.6-1.4 0.1-4.5 0.5-7 1.1z"/>
+            <path d="m655.5 157.2c6.9 8 18.3 23.7 24.1 33 7.1 11.5 17.8 32.5 22.4 44.2l3.5 8.7 6.5-0.6c31.5-3.1 106-16.2 106-18.7 0-0.5-6.4-5.1-14.2-10.2-42.6-28.1-89.8-48.1-136.7-58-16.1-3.4-16-3.4-11.6 1.6z"/>
+            <path d="m892.1 436.1c-33.3 5.1-52.7 28.8-58.7 71.6-2.3 16.7-1.5 52.6 1.5 66.6 9.5 43.8 34 64.3 74.5 62.4 21.1-1 32.6-5.6 45.1-18.2 17.4-17.3 24.4-41.2 24.5-82.5 0-33.9-4.9-55.4-16.7-73.2-8.2-12.5-21.5-21.7-36.3-25.3-8.3-1.9-25.6-2.7-33.9-1.4z"/>
+            <path d="m548 825.6c-27 1.5-45.5 2.6-45.8 2.9-0.8 0.8 11.8 26.7 18.4 38.1 14.2 24.4 28.2 40.8 42.6 50.2 9.4 6.1 15.1 8.1 24.4 8.9 9.1 0.7 15.7-0.8 25.9-6 11.5-5.9 28.1-22.6 39.4-39.7 7.5-11.3 26.1-46.8 26.1-49.8 0-1.6-2.1-1.9-21.5-3.2-16.4-1.1-96.3-2.1-109.5-1.4z"/>
+            <path d="m465.5 831.7c-1.6 0.2-11.2 1.5-21.3 2.9-24 3.3-42.8 6.5-63.9 11-13.4 2.9-17 4-16.2 5 1.8 2.2 28.1 19.1 41.3 26.4 34.2 19.1 71.4 33.2 108.6 41 7.7 1.7 14.5 3 15.1 3s-1.3-2.8-4.3-6.3c-16.2-18.5-31.5-43.7-43.9-72.2l-4.8-11-3.8-0.1c-2.1-0.1-5.1 0-6.8 0.3z"/>
+            <path d="m703.1 837.3c-3.7 9.4-16.1 34-22.6 44.7-7 11.6-15.5 23.4-22.9 31.9-3.1 3.6-5.4 6.6-5.2 6.9 1.1 1.1 35.1-7.1 53.3-12.9 32.7-10.4 73.9-30.8 103.7-51.3l8.8-6.1-5.3-1.2c-26.8-6.2-58.9-12-84.4-15.3-8.8-1.1-17.6-2.2-19.5-2.5l-5.9 5.8z"/>
+          </g>
+        </svg>
+        <h4>ISO Certified</h4>
+        <p>ISO certified processes guarantee consistent, auditable quality standards across every single production run.</p>
+      </div>
+      <div class="prin-item">
+        <!-- Phosphor: globe-hemisphere-west-fill — Global Reach -->
+        <svg class="prin-icon" viewBox="0 0 256 256" fill="currentColor">
+          <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm88,104a87.62,87.62,0,0,1-6.4,32.94l-44.7-27.49a15.92,15.92,0,0,0-6.24-2.23l-22.82-3.08a16.11,16.11,0,0,0-16,7.86h-8.72l-3.8-7.86a15.91,15.91,0,0,0-11-8.67l-8-1.73L96.14,104h16.71a16.06,16.06,0,0,0,7.73-2l12.25-6.76a16.62,16.62,0,0,0,3-2.14l26.91-24.34A15.93,15.93,0,0,0,166,49.1l-.36-.65A88.11,88.11,0,0,1,216,128ZM40,128a87.53,87.53,0,0,1,8.54-37.8l11.34,30.27a16,16,0,0,0,11.62,10l21.43,4.61L96.74,143a16.09,16.09,0,0,0,14.4,9h1.48l-7.23,16.23a16,16,0,0,0,2.86,17.37l.14.14L128,205.94l-1.94,10A88.11,88.11,0,0,1,40,128Z"/>
+        </svg>
+        <h4>Global Reach</h4>
+        <p>Air, sea, and ground logistics to every corner of the world — your products arrive wherever your customers are.</p>
+      </div>
+      <div class="prin-item">
+        <!-- Phosphor: handshake-fill — Trusted Suppliers -->
+        <svg class="prin-icon" viewBox="0 0 256 256" fill="currentColor">
+          <path d="M119.76,217.94A8,8,0,0,1,112,224a8.13,8.13,0,0,1-2-.24l-32-8a8,8,0,0,1-2.5-1.11l-24-16a8,8,0,1,1,8.88-13.31l22.84,15.23,30.66,7.67A8,8,0,0,1,119.76,217.94Zm132.69-96.46a15.89,15.89,0,0,1-8,9.25l-23.68,11.84-15.08,15.09-40,40a8,8,0,0,1-7.6,2.1l-64-16a8.06,8.06,0,0,1-2.71-1.25L35.86,142.87,11.58,130.73a16,16,0,0,1-7.16-21.46L29.27,59.58h0a16,16,0,0,1,21.46-7.16l22.06,11,53-15.14a8,8,0,0,1,4.4,0l53,15.14,22.06-11a16,16,0,0,1,21.46,7.16l24.85,49.69A15.9,15.9,0,0,1,252.45,121.48ZM188,152.66l-27.71-22.19c-19.54,16-44.35,18.11-64.91,5a16,16,0,0,1-2.72-24.82.6.6,0,0,1,.08-.08L137.6,67.06,128,64.32,77.58,78.73,50.21,133.46l49.2,35.15,58.14,14.53Zm18.24-18.24L179.06,80H147.24L104,122c12.66,8.09,32.51,10.32,50.32-7.63a8,8,0,0,1,10.68-.61l34.41,27.57Z"/>
+        </svg>
+        <h4>Trusted Suppliers</h4>
+        <p>Long-standing relationships with carefully vetted, premium material suppliers across the globe.</p>
+      </div>
+      <div class="prin-item">
+        <!-- Phosphor: chart-line-up-fill — Scale Accordingly -->
+        <svg class="prin-icon" viewBox="0 0 256 256" fill="currentColor">
+          <path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM200,192H56a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v76.69l34.34-34.35a8,8,0,0,1,11.32,0L128,132.69,172.69,88H152a8,8,0,0,1,0-16h40a8,8,0,0,1,8,8v40a8,8,0,0,1-16,0V99.31l-50.34,50.35a8,8,0,0,1-11.32,0L104,131.31l-40,40V176H200a8,8,0,0,1,0,16Z"/>
+        </svg>
+        <h4>Scale Accordingly</h4>
+        <p>Flexible production capacity grows with your brand — startup or enterprise, we adapt to your needs.</p>
+      </div>
+      <div class="prin-item">
+        <!-- Phosphor: pen-nib-fill — Pro Design Team -->
+        <svg class="prin-icon" viewBox="0 0 256 256" fill="currentColor">
+          <path d="M235.31,89.36,166.63,20.68a16,16,0,0,0-22.63,0L115.56,49.12l-58,21.76A16,16,0,0,0,47.36,83.23L26.59,207.83a4,4,0,0,0,6.77,3.49l57-57a23.85,23.85,0,0,1-2.29-12.08,24,24,0,1,1,13.6,23.4l-57,57a4,4,0,0,0,3.49,6.77l124.61-20.77a16,16,0,0,0,12.35-10.16l21.77-58.07L235.31,112a16,16,0,0,0,0-22.63ZM200,124.68,131.32,56l24-24L224,100.68Z"/>
+        </svg>
+        <h4>Pro Design Team</h4>
+        <p>In-house designers with deep industry expertise creating products that turn heads and build brand loyalty.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ VERTICAL INTEGRATION ══════════════ -->
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div class="diff-grid">
+      <div>
+        <p class="eyebrow rv">Vertical Integration</p>
+        <h2 class="heading rv">One Partner.<br><span class="ac">Every Step.</span></h2>
+        <p class="body-text rv">
+          Cotapaxi's vertically integrated model means we own quality, cost, and timelines from concept through delivery. No middlemen, no miscommunication, no surprises.
+        </p>
+        <div class="diff-feats rv" style="transition-delay:0.1s">
+          <div class="diff-feat">
+            <div class="diff-feat-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/>
+              </svg>
+            </div>
+            <div>
+              <h5>Full Design Control</h5>
+              <p>Every detail is designed in house and approved by you before production begins — zero surprises.</p>
+            </div>
+          </div>
+          <div class="diff-feat">
+            <div class="diff-feat-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/>
+              </svg>
+            </div>
+            <div>
+              <h5>Cost Transparency</h5>
+              <p>Direct factory relationships eliminate middlemen markups — factory pricing with premium service.</p>
+            </div>
+          </div>
+          <div class="diff-feat">
+            <div class="diff-feat-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h5>Faster Turnaround</h5>
+              <p>No communication delays between external suppliers — decisions happen in house, cutting lead times dramatically.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diff-visual rv" style="transition-delay:0.18s">
+        <img src="/brand_assets/Vertical%20Integration.png" alt="Vertical integration">
+        <div class="diff-badge">
+          <div class="diff-badge-num">100%</div>
+          <div class="diff-badge-lbl">In-House Control</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CONTACT ══════════════ -->
+<section class="sec" id="contact">
+  <div class="wrap">
+    <p class="eyebrow rv" style="text-align:center">Get Started With Cotapaxi</p>
+    <h2 class="heading rv" style="text-align:center;max-width:560px;margin:0 auto 1rem">
+      Ready to Elevate<br><span class="ac">Your Brand?</span>
+    </h2>
+    <p class="body-text rv" style="text-align:center;margin:0 auto 0;max-width:460px">
+      Tell us about your project. We'll respond within 24 hours with a tailored plan and transparent pricing.
+    </p>
+    <div class="cta-split rv" style="transition-delay:0.12s">
+      <div class="cta-card">
+        <div class="cta-ey">For Brands</div>
+        <h3>Custom Product Development</h3>
+        <p>Looking for unique promotional products, sports gear, or branded merchandise? Let's build something remarkable together.</p>
+        <ul class="cta-ul">
+          <li>No minimum order quantities</li>
+          <li>Custom design from first brief</li>
+          <li>End to end manufacturing &amp; delivery</li>
+          <li>ISO-certified quality assurance</li>
+        </ul>
+        <a href="mailto:hello@cotapaxi.com" class="btn-solid">Contact Our Team</a>
+      </div>
+      <div class="cta-card" style="border-left:1.5px solid var(--bdr)">
+        <div class="cta-ey">For Distributors</div>
+        <h3>Wholesale &amp; Partnership</h3>
+        <p>Already in the promotional products space? Partner with Cotapaxi's manufacturing and global sourcing network.</p>
+        <ul class="cta-ul">
+          <li>Factory-direct pricing</li>
+          <li>Global sourcing network</li>
+          <li>Flexible terms for partners</li>
+          <li>Dedicated account management</li>
+        </ul>
+        <a href="mailto:partners@cotapaxi.com" class="btn-ghost" style="padding:0.6rem 1.5rem">Become a Partner</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ GLOW / BRAND MOMENT ══════════════ -->
+<section class="glow-sec">
+  <canvas id="glslHillsCanvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;display:block;"></canvas>
+  <div style="position:relative;z-index:2">
+    <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);margin-bottom:1rem">Courage &amp; Bold Action</p>
+    <h2 style="font-family:'GTAmericaComp',sans-serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:700;text-transform:uppercase;line-height:0.92;letter-spacing:-0.015em;max-width:700px;margin:0 auto 1.5rem;color:#ffffff">
+      Unleash Your<br><span style="color:var(--green)">Design</span> <span style="color:var(--green)">Creativity</span><br>With <span style="color:var(--green)">Cotapaxi</span>
+    </h2>
+    <p style="color:#ffffff;font-size:1.0625rem;line-height:1.7;max-width:460px;margin:0 auto 2.5rem">
+      Great brands are built on great products. Let's create something the world hasn't seen before.
+    </p>
+    <a href="#contact" class="btn-solid" style="font-size:1rem;padding:0.75rem 2rem">Start Your Project</a>
+  </div>
+</section>
+
+<!-- ══════════════ NEWSLETTER ══════════════ -->
+<div class="nl-band">
+  <div class="nl-inner">
+    <div>
+      <div class="nl-title">Stay in the Loop</div>
+      <div class="nl-sub">Industry insights, new product launches, and Cotapaxi updates.</div>
+    </div>
+    <div class="nl-form">
+      <input type="email" class="nl-input" placeholder="Enter your email address">
+      <button class="btn-solid" style="font-size:0.875rem">Subscribe</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <img src="/brand_assets/Cotapaxi%20Logo.svg" alt="Cotapaxi" style="height:64px;width:auto;display:block;margin-bottom:0.75rem">
+      <p class="ft-desc">Custom design and manufacturing for promotional products that make your brand stand out. Helping brands since 2015.</p>
+    </div>
+    <div class="ft-col">
+      <h5>Services</h5>
+      <ul class="ft-links">
+        <li><a href="#">Manufacturing</a></li>
+        <li><a href="#">Sourcing</a></li>
+        <li><a href="#">Logistics</a></li>
+        <li><a href="#">Design</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h5>Company</h5>
+      <ul class="ft-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Process</a></li>
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="#">Principles</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h5>Contact</h5>
+      <ul class="ft-links">
+        <li><a href="#">Get Started</a></li>
+        <li><a href="#">Partnerships</a></li>
+        <li><a href="#">hello@cotapaxi.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-legal">© 2026 Cotapaxi. All rights reserved.</div>
+    <div class="ft-leg-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Process accordion ──
+  const procSteps = [
+    { num: '01', title: 'Briefing',     desc: 'We learn your brand goals, budget, timeline, and target audience to lay the strategic foundation for your product.' },
+    { num: '02', title: 'Ideation',     desc: 'Our in-house design team generates creative concepts that align with your identity and make your product stand out.' },
+    { num: '03', title: 'Modeling',     desc: 'Detailed digital models and high fidelity renders bring the concept to life before any material is committed.' },
+    { num: '04', title: 'Prototyping',  desc: 'A physical prototype is produced and refined iteratively until it meets your exact specifications and passes QA.' },
+    { num: '05', title: 'Production',   desc: 'ISO certified full scale manufacturing followed by complete logistics management and global delivery.' },
+  ];
+  let procActive = 0;
+  const procPanels = document.querySelectorAll('.proc-panel');
+  const procInfoInner = document.getElementById('procInfoInner');
+  const procNum   = document.getElementById('procNum');
+  const procTitle = document.getElementById('procTitle');
+  const procDesc  = document.getElementById('procDesc');
+
+  function procHover(index) {
+    if (index === procActive) return;
+    // Fade out left-side copy
+    procInfoInner.classList.add('fade-out');
+    setTimeout(() => {
+      procActive = index;
+      // Update copy
+      procNum.textContent   = procSteps[index].num;
+      procTitle.textContent = procSteps[index].title;
+      procDesc.textContent  = procSteps[index].desc;
+      // Fade back in
+      procInfoInner.classList.remove('fade-out');
+      // Update active panel
+      procPanels.forEach((p, i) => p.classList.toggle('active', i === index));
+    }, 240);
+  }
+
+  procPanels.forEach((panel, i) => {
+    panel.addEventListener('mouseenter', () => procHover(i));
+  });
+
+  // ── Hamburger nav toggle
+  const hamburger = document.querySelector('.nav-hamburger');
+  const nav = document.querySelector('.nav');
+  hamburger.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', open);
+  });
+  // Close nav when a link is clicked
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
+    { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+  );
+  document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+</script>
+
+<script>
+// ── GLSL Hills Background ──
+(function() {
+  function initGLSLHills() {
+    var canvas = document.getElementById('glslHillsCanvas');
+    if (!canvas || typeof THREE === 'undefined') return;
+
+    var cameraZ   = 125;
+    var planeSize = 256;
+    var speed     = 0.5;
+
+    var uniforms = { time: { type: 'f', value: 0 } };
+
+    var vertexShader = [
+      '#define GLSLIFY 1',
+      'attribute vec3 position;',
+      'uniform mat4 projectionMatrix;',
+      'uniform mat4 modelViewMatrix;',
+      'uniform float time;',
+      'varying vec3 vPosition;',
+
+      'mat4 rotateMatrixX(float radian) {',
+      '  return mat4(',
+      '    1.0, 0.0, 0.0, 0.0,',
+      '    0.0, cos(radian), -sin(radian), 0.0,',
+      '    0.0, sin(radian),  cos(radian), 0.0,',
+      '    0.0, 0.0, 0.0, 1.0',
+      '  );',
+      '}',
+
+      'vec3 mod289v3(vec3 x) { return x - floor(x * (1.0/289.0)) * 289.0; }',
+      'vec4 mod289v4(vec4 x) { return x - floor(x * (1.0/289.0)) * 289.0; }',
+      'vec4 permute(vec4 x)  { return mod289v4(((x*34.0)+1.0)*x); }',
+      'vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }',
+      'vec3 fade(vec3 t) { return t*t*t*(t*(t*6.0-15.0)+10.0); }',
+
+      'float cnoise(vec3 P) {',
+      '  vec3 Pi0 = floor(P); vec3 Pi1 = Pi0 + vec3(1.0);',
+      '  Pi0 = mod289v3(Pi0); Pi1 = mod289v3(Pi1);',
+      '  vec3 Pf0 = fract(P); vec3 Pf1 = Pf0 - vec3(1.0);',
+      '  vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);',
+      '  vec4 iy = vec4(Pi0.yy, Pi1.yy);',
+      '  vec4 iz0 = Pi0.zzzz; vec4 iz1 = Pi1.zzzz;',
+      '  vec4 ixy  = permute(permute(ix) + iy);',
+      '  vec4 ixy0 = permute(ixy + iz0);',
+      '  vec4 ixy1 = permute(ixy + iz1);',
+      '  vec4 gx0 = ixy0*(1.0/7.0);',
+      '  vec4 gy0 = fract(floor(gx0)*(1.0/7.0)) - 0.5;',
+      '  gx0 = fract(gx0);',
+      '  vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0);',
+      '  vec4 sz0 = step(gz0, vec4(0.0));',
+      '  gx0 -= sz0*(step(0.0,gx0)-0.5); gy0 -= sz0*(step(0.0,gy0)-0.5);',
+      '  vec4 gx1 = ixy1*(1.0/7.0);',
+      '  vec4 gy1 = fract(floor(gx1)*(1.0/7.0)) - 0.5;',
+      '  gx1 = fract(gx1);',
+      '  vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1);',
+      '  vec4 sz1 = step(gz1, vec4(0.0));',
+      '  gx1 -= sz1*(step(0.0,gx1)-0.5); gy1 -= sz1*(step(0.0,gy1)-0.5);',
+      '  vec3 g000=vec3(gx0.x,gy0.x,gz0.x); vec3 g100=vec3(gx0.y,gy0.y,gz0.y);',
+      '  vec3 g010=vec3(gx0.z,gy0.z,gz0.z); vec3 g110=vec3(gx0.w,gy0.w,gz0.w);',
+      '  vec3 g001=vec3(gx1.x,gy1.x,gz1.x); vec3 g101=vec3(gx1.y,gy1.y,gz1.y);',
+      '  vec3 g011=vec3(gx1.z,gy1.z,gz1.z); vec3 g111=vec3(gx1.w,gy1.w,gz1.w);',
+      '  vec4 norm0=taylorInvSqrt(vec4(dot(g000,g000),dot(g010,g010),dot(g100,g100),dot(g110,g110)));',
+      '  g000*=norm0.x; g010*=norm0.y; g100*=norm0.z; g110*=norm0.w;',
+      '  vec4 norm1=taylorInvSqrt(vec4(dot(g001,g001),dot(g011,g011),dot(g101,g101),dot(g111,g111)));',
+      '  g001*=norm1.x; g011*=norm1.y; g101*=norm1.z; g111*=norm1.w;',
+      '  float n000=dot(g000,Pf0);',
+      '  float n100=dot(g100,vec3(Pf1.x,Pf0.yz));',
+      '  float n010=dot(g010,vec3(Pf0.x,Pf1.y,Pf0.z));',
+      '  float n110=dot(g110,vec3(Pf1.xy,Pf0.z));',
+      '  float n001=dot(g001,vec3(Pf0.xy,Pf1.z));',
+      '  float n101=dot(g101,vec3(Pf1.x,Pf0.y,Pf1.z));',
+      '  float n011=dot(g011,vec3(Pf0.x,Pf1.yz));',
+      '  float n111=dot(g111,Pf1);',
+      '  vec3 fade_xyz=fade(Pf0);',
+      '  vec4 n_z=mix(vec4(n000,n100,n010,n110),vec4(n001,n101,n011,n111),fade_xyz.z);',
+      '  vec2 n_yz=mix(n_z.xy,n_z.zw,fade_xyz.y);',
+      '  float n_xyz=mix(n_yz.x,n_yz.y,fade_xyz.x);',
+      '  return 2.2*n_xyz;',
+      '}',
+
+      'void main(void) {',
+      '  vec3 updatePosition = (rotateMatrixX(radians(90.0)) * vec4(position,1.0)).xyz;',
+      '  float sin1 = sin(radians(updatePosition.x / 128.0 * 90.0));',
+      '  vec3 noisePosition = updatePosition + vec3(0.0, 0.0, time * -30.0);',
+      '  float noise1 = cnoise(noisePosition * 0.08);',
+      '  float noise2 = cnoise(noisePosition * 0.06);',
+      '  float noise3 = cnoise(noisePosition * 0.4);',
+      '  vec3 lastPosition = updatePosition + vec3(0.0,',
+      '    noise1*sin1*8.0 + noise2*sin1*8.0',
+      '    + noise3*(abs(sin1)*2.0+0.5)',
+      '    + pow(sin1,2.0)*40.0, 0.0);',
+      '  vPosition = lastPosition;',
+      '  gl_Position = projectionMatrix * modelViewMatrix * vec4(lastPosition, 1.0);',
+      '}'
+    ].join('\n');
+
+    var fragmentShader = [
+      'precision highp float;',
+      '#define GLSLIFY 1',
+      'varying vec3 vPosition;',
+      'void main(void) {',
+      '  float opacity = (96.0 - length(vPosition)) / 256.0 * 0.55;',
+      '  vec3 color = vec3(0.71, 0.96, 0.25);',  // brand green #b5f53f
+      '  gl_FragColor = vec4(color, opacity);',
+      '}'
+    ].join('\n');
+
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: false, alpha: true });
+    var scene    = new THREE.Scene();
+    var camera   = new THREE.PerspectiveCamera(45, 1, 1, 10000);
+    var clock    = new THREE.Clock();
+
+    var mesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(planeSize, planeSize, planeSize, planeSize),
+      new THREE.RawShaderMaterial({
+        uniforms:       uniforms,
+        vertexShader:   vertexShader,
+        fragmentShader: fragmentShader,
+        transparent:    true
+      })
+    );
+
+    renderer.setClearColor(0x000000, 0);
+    camera.position.set(0, 16, cameraZ);
+    camera.lookAt(new THREE.Vector3(0, 28, 0));
+    scene.add(mesh);
+
+    var section = canvas.parentElement;
+
+    function resize() {
+      var w = section.offsetWidth;
+      var h = section.offsetHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    function renderLoop() {
+      uniforms.time.value += clock.getDelta() * speed;
+      renderer.render(scene, camera);
+      requestAnimationFrame(renderLoop);
+    }
+    renderLoop();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGLSLHills);
+  } else {
+    initGLSLHills();
+  }
+})();
+</script>
+</body>
+</html>
