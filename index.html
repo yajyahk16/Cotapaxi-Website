@@ -93,9 +93,9 @@
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background-image: url('/brand_assets/Hero%20Image.png');
+      background-image: url('/brand_assets/Hero%203.png');
       background-size: cover;
-      background-position: center 30%;
+      background-position: 22% 30%;
       background-repeat: no-repeat;
     }
     .hero-bg::after {
@@ -202,14 +202,14 @@
     /* ── SERVICE CARDS ── */
     .svc-grid {
       display: grid; grid-template-columns: repeat(3,1fr);
-      gap: 1.5px; margin-top: 3rem;
-      background: var(--bdr); border: 1.5px solid var(--bdr);
-      border-radius: 8px; overflow: hidden;
+      gap: 1.25rem; margin-top: 3rem;
     }
     .svc-card {
       background: var(--bg3); position: relative; overflow: hidden;
       aspect-ratio: 3/4; display: flex; flex-direction: column;
       justify-content: flex-end; cursor: pointer;
+      border-radius: 8px;
+      border: 1.5px solid rgba(180,180,180,0.18);
     }
     .svc-card img {
       position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
@@ -635,10 +635,11 @@
       }
       .hero-content { max-width: 100%; }
       .hero h1 { font-size: clamp(3.5rem, 8vw, 5.5rem); }
-      .hero-sub { max-width: 100%; }
+      .hero-sub { max-width: min(480px, 62%); }
 
       .svc-grid { grid-template-columns: repeat(2, 1fr); }
       .svc-card { aspect-ratio: 4/5; }
+      .svc-grid .svc-card:last-child { grid-column: 1 / -1; aspect-ratio: 16/9; }
 
       .process-grid { grid-template-columns: repeat(3, 1fr); }
 
@@ -688,9 +689,10 @@
       .stats-inner { grid-template-columns: repeat(3, 1fr); }
       .stat-cell { padding: 1.75rem 1.25rem; }
 
-      /* Services: keep 2-col at tablet, 1-col only below 480px */
-      .svc-grid { grid-template-columns: repeat(2, 1fr); }
+      /* Services: single column vertical stack on mobile (Relume pattern) */
+      .svc-grid { grid-template-columns: 1fr; }
       .svc-card { aspect-ratio: 4/3; }
+      .svc-grid .svc-card:last-child { grid-column: unset; aspect-ratio: 4/3; }
 
       /* Showcase */
       .showcase-grid { grid-template-columns: 1fr; }
@@ -746,6 +748,7 @@
       .sec { padding: 3rem 1rem; }
       .glow-sec { padding: 4rem 1rem; }
       .hero-inner { padding: 2rem 1rem 3.5rem; }
+      .hero-sub { max-width: 88%; }
 
       .process-grid { grid-template-columns: 1fr; }
       .svc-grid { grid-template-columns: 1fr; }
@@ -772,7 +775,7 @@
 <!-- ══════════════ NAV ══════════════ -->
 <nav class="nav">
   <a href="#" class="nav-logo" aria-label="Cotapaxi home">
-    <img src="/brand_assets/Cotapaxi%20Logo.svg" alt="Cotapaxi" style="height:36px;width:auto;display:block">
+    <img src="/brand_assets/Cotapaxi%20Logo.svg" alt="Cotapaxi" style="height:40px;width:auto;display:block">
   </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
@@ -816,7 +819,7 @@
   <div class="stats-inner">
     <div class="stat-cell rv">
       <div class="stat-num">No MOQ</div>
-      <div class="stat-lbl">No minimum order quantities —<br>order exactly what you need</div>
+      <div class="stat-lbl">No minimum order quantities,<br>order exactly what you need</div>
     </div>
     <div class="stat-cell rv" style="transition-delay:0.1s">
       <div class="stat-num">ISO</div>
@@ -838,7 +841,7 @@
         Everything<br>Your Brand<br><span class="ac">Needs</span>
       </h2>
       <p class="body-text rv" style="transition-delay:0.14s;max-width:380px">
-        From initial concept to final delivery, Cotapaxi handles every step — manufacturing, sourcing, and logistics — under one roof, with full quality control throughout.
+        From initial concept to final delivery, Cotapaxi handles every step: manufacturing, sourcing, and logistics, all under one roof with full quality control throughout.
       </p>
     </div>
     <div class="svc-grid rv" style="transition-delay:0.1s">
@@ -848,7 +851,7 @@
         <span class="svc-label-top">In-House</span>
         <div class="svc-content">
           <h3>Manufacturing</h3>
-          <p>State of the art production for custom promotional products, fitness gear, and branded merchandise — patented designs included.</p>
+          <p>State of the art production for custom promotional products, fitness gear, and branded merchandise, patented designs included.</p>
         </div>
       </div>
       <div class="svc-card">
@@ -866,7 +869,7 @@
         <span class="svc-label-top">End to End</span>
         <div class="svc-content">
           <h3>Logistics</h3>
-          <p>Complete air, ground, and sea freight solutions — your products reach any corner of the globe, on time and in perfect condition.</p>
+          <p>Complete air, ground, and sea freight solutions, reaching any corner of the globe on time and in perfect condition.</p>
         </div>
       </div>
     </div>
@@ -964,7 +967,7 @@
           Our Design<br><span class="ac">Process</span>
         </h2>
         <p class="body-text">
-          A transparent five step journey from your first brief to final delivery — with collaboration and quality assurance built in at every stage.
+          A transparent five step journey from your first brief to final delivery, with collaboration and quality assurance built in at every stage.
         </p>
         <div class="proc-info">
           <div class="proc-info-inner" id="procInfoInner">
@@ -1041,7 +1044,7 @@
         </h2>
       </div>
       <p class="body-text rv" style="margin-top:4rem">
-        At Cotapaxi, we specialise in Fitness and Sports Giveaways, patented items, and branded merchandise across many fields. Our attention to detail and expertise means your vision becomes reality — every time.
+        At Cotapaxi, we specialise in Fitness and Sports Giveaways, patented items, and branded merchandise across many fields. Our attention to detail and expertise means your vision becomes reality, every time.
       </p>
     </div>
     <div class="prin-grid rv" style="transition-delay:0.1s">
@@ -1051,7 +1054,7 @@
           <path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.35,44L178.57,92.29l-80.35-44Zm0,88L47.65,76,81.56,57.43l80.35,44Zm88,55.85h0l-80,43.79V133.83l32-17.51V152a8,8,0,0,0,16,0V107.56l32-17.51v85.76Z"/>
         </svg>
         <h4>No Minimum Orders</h4>
-        <p>Order exactly what you need — 1 piece or 100,000. No MOQ restrictions ever hold your brand back.</p>
+        <p>Order exactly what you need, from 1 piece to 100,000. No MOQ restrictions ever hold your brand back.</p>
       </div>
       <div class="prin-item">
         <!-- Official ISO logo — Wikimedia Commons (CC BY-SA 4.0) -->
@@ -1076,7 +1079,7 @@
           <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm88,104a87.62,87.62,0,0,1-6.4,32.94l-44.7-27.49a15.92,15.92,0,0,0-6.24-2.23l-22.82-3.08a16.11,16.11,0,0,0-16,7.86h-8.72l-3.8-7.86a15.91,15.91,0,0,0-11-8.67l-8-1.73L96.14,104h16.71a16.06,16.06,0,0,0,7.73-2l12.25-6.76a16.62,16.62,0,0,0,3-2.14l26.91-24.34A15.93,15.93,0,0,0,166,49.1l-.36-.65A88.11,88.11,0,0,1,216,128ZM40,128a87.53,87.53,0,0,1,8.54-37.8l11.34,30.27a16,16,0,0,0,11.62,10l21.43,4.61L96.74,143a16.09,16.09,0,0,0,14.4,9h1.48l-7.23,16.23a16,16,0,0,0,2.86,17.37l.14.14L128,205.94l-1.94,10A88.11,88.11,0,0,1,40,128Z"/>
         </svg>
         <h4>Global Reach</h4>
-        <p>Air, sea, and ground logistics to every corner of the world — your products arrive wherever your customers are.</p>
+        <p>Air, sea, and ground logistics to every corner of the world, reaching wherever your customers are.</p>
       </div>
       <div class="prin-item">
         <!-- Phosphor: handshake-fill — Trusted Suppliers -->
@@ -1092,7 +1095,7 @@
           <path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM200,192H56a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v76.69l34.34-34.35a8,8,0,0,1,11.32,0L128,132.69,172.69,88H152a8,8,0,0,1,0-16h40a8,8,0,0,1,8,8v40a8,8,0,0,1-16,0V99.31l-50.34,50.35a8,8,0,0,1-11.32,0L104,131.31l-40,40V176H200a8,8,0,0,1,0,16Z"/>
         </svg>
         <h4>Scale Accordingly</h4>
-        <p>Flexible production capacity grows with your brand — startup or enterprise, we adapt to your needs.</p>
+        <p>Flexible production capacity grows with your brand. Startup or enterprise, we adapt to your needs.</p>
       </div>
       <div class="prin-item">
         <!-- Phosphor: pen-nib-fill — Pro Design Team -->
@@ -1125,7 +1128,7 @@
             </div>
             <div>
               <h5>Full Design Control</h5>
-              <p>Every detail is designed in house and approved by you before production begins — zero surprises.</p>
+              <p>Every detail is designed in house and approved by you before production begins, with zero surprises.</p>
             </div>
           </div>
           <div class="diff-feat">
@@ -1136,7 +1139,7 @@
             </div>
             <div>
               <h5>Cost Transparency</h5>
-              <p>Direct factory relationships eliminate middlemen markups — factory pricing with premium service.</p>
+              <p>Direct factory relationships eliminate middlemen markups, giving you factory pricing with premium service.</p>
             </div>
           </div>
           <div class="diff-feat">
@@ -1147,7 +1150,7 @@
             </div>
             <div>
               <h5>Faster Turnaround</h5>
-              <p>No communication delays between external suppliers — decisions happen in house, cutting lead times dramatically.</p>
+              <p>No communication delays between external suppliers; decisions happen in house, cutting lead times dramatically.</p>
             </div>
           </div>
         </div>
